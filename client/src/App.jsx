@@ -1,4 +1,8 @@
-import Header from "./components/header/Header.jsx";
+import { Routes, Route } from "react-router";
+import Header from "./components/header/Header";
+import Home from "./components/home/Home.jsx";
+import Login from "./components/login/login.jsx";
+import Register from "./components/register/Register.jsx";
 
 function App() {
   return (
@@ -7,141 +11,23 @@ function App() {
       <Header />
 
       {/* Main Content */}
-      <main id="main-content"></main>
+      <main id="main-content">
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+        
+      </Routes>
+      </main>
 
       {/*Home Page*/}
-      <section id="welcome-world">
-        <div className="welcome-message">
-          <h2>ALL new games are</h2>
-          <h3>Only in GamesPlay</h3>
-        </div>
-        <img src="/images/four_slider_img01.png" alt="hero" />
-
-        <div id="home-page">
-          <h1>Latest Games</h1>
-
-          {/* Display div: with information about every game (if any) */}
-          <div className="game">
-            <div className="image-wrap">
-              <img src="/images/CoverFire.png" />
-            </div>
-            <h3>Cover Fire</h3>
-            <div className="rating">
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-            </div>
-            <div className="data-buttons">
-              <a href="#" className="btn details-btn">
-                Details
-              </a>
-            </div>
-          </div>
-          <div className="game">
-            <div className="image-wrap">
-              <img src="/images/ZombieLang.png" />
-            </div>
-            <h3>Zombie Lang</h3>
-            <div className="rating">
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-            </div>
-            <div className="data-buttons">
-              <a href="#" className="btn details-btn">
-                Details
-              </a>
-            </div>
-          </div>
-          <div className="game">
-            <div className="image-wrap">
-              <img src="/images/MineCraft.png" />
-            </div>
-            <h3>MineCraft</h3>
-            <div className="rating">
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-              <span>☆</span>
-            </div>
-            <div className="data-buttons">
-              <a href="#" className="btn details-btn">
-                Details
-              </a>
-            </div>
-          </div>
-
-          {/* Display paragraph: If there is no games  */}
-          <p className="no-articles">No games yet</p>
-        </div>
-      </section>
+      
 
       {/* Login Page ( Only for Guest users ) */}
-      <section id="login-page" className="auth">
-        <form id="login">
-          <div className="container">
-            <div className="brand-logo"></div>
-            <h1>Login</h1>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Sokka@gmail.com"
-            />
-
-            <label htmlFor="login-pass">Password:</label>
-            <input type="password" id="login-password" name="password" />
-            <input type="submit" className="btn submit" value="Login" />
-            <p className="field">
-              <span>
-                If you don't have profile click <a href="#">here</a>
-              </span>
-            </p>
-          </div>
-        </form>
-      </section>
+      
 
       {/* Register Page ( Only for Guest users ) */}
-      <section id="register-page" className="content auth">
-        <form id="register">
-          <div className="container">
-            <div className="brand-logo"></div>
-            <h1>Register</h1>
-
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="maria@email.com"
-            />
-
-            <label htmlFor="pass">Password:</label>
-            <input type="password" name="password" id="register-password" />
-
-            <label htmlFor="con-pass">Confirm Password:</label>
-            <input
-              type="password"
-              name="confirm-password"
-              id="confirm-password"
-            />
-
-            <input className="btn submit" type="submit" value="Register" />
-
-            <p className="field">
-              <span>
-                If you already have profile click <a href="#">here</a>
-              </span>
-            </p>
-          </div>
-        </form>
-      </section>
+      
 
       {/* Create Page ( Only for logged-in users ) */}
       <section id="create-page" className="auth">
