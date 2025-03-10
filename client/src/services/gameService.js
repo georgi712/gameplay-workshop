@@ -13,9 +13,13 @@ export default {
         return games;
     },
     getOne(gameId) {
-        return request.get(`${baseUrl}/${gameId}`)
+        return request.get(`${baseUrl}/${gameId}`);
     },
     delete(gameId) {
         return request.delete(`${baseUrl}/${gameId}`);
+    },
+    edit(gameId, gameData) {
+        console.log(gameId);
+        return request.put(`${baseUrl}/${gameId}`, { ...gameData, _id: gameId });
     }
 };
