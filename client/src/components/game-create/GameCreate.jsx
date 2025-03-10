@@ -8,8 +8,7 @@ export default function GameCreate() {
   const submitAction = async (formData) => {
     const gameData = Object.fromEntries(formData);
 
-    const result = await gameService.create(gameData);
-    console.log(result);
+    await gameService.create(gameData);
 
     navigate('/games')
   }
