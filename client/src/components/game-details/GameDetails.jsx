@@ -3,32 +3,37 @@ import { Link, useNavigate, useParams } from "react-router";
 import gameService from "../../services/gameService.js";
 import CommentsShow from "../comments-show/CommentsShow.jsx";
 import CommentsCreate from "../comments-create/CommentsCreate.jsx";
+import commentService from "../../services/commentService.js";
 
-export default function GameDetails({
-  email,
-}) {
+export default function GameDetails({ email }) {
   const [game, setGame] = useState({});
+  const [comments, setComments] = useState([]);
   const { gameId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      const result =  await gameService.getOne(gameId);
-      setGame(result)
-    })();
-  }, [gameId])
+    gameService.getOne(gameId).then(setGame);
+
+    commentService.getAll(gameId).then(setComments);
+  }, [gameId]);
 
   const gameDeleteClickHandler = async () => {
-    const hasConfirmed = confirm(`Are you sure you want to delete ${game.title} game?`);
+    const hasConfirmed = confirm(
+      `Are you sure you want to delete ${game.title} game?`
+    );
 
     if (!hasConfirmed) {
-      return
+      return;
     }
 
     await gameService.delete(game._id);
 
-    navigate('/games')
-  }
+    navigate("/games");
+  };
+
+  const commentCreateHandler = (newComment) => {
+    setComments(state => [...state, newComment])
+  };
 
   return (
     <section id="game-details">
@@ -41,13 +46,11 @@ export default function GameDetails({
           <p className="type">{game.category}</p>
         </div>
 
-        <p className="text">
-          {game.summary}
-        </p>
+        <p className="text">{game.summary}</p>
 
         {/* Bonus ( for Guests and Users ) */}
-        
-        <CommentsShow />
+
+        <CommentsShow comments={comments} />
 
         {/* Edit/Delete buttons ( Only for creator of this game )  */}
         <div className="buttons">
@@ -62,9 +65,12 @@ export default function GameDetails({
 
       {/* Bonus */}
       {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
-      
-    <CommentsCreate email={email} gameId={gameId}/>
 
+      <CommentsCreate 
+        email={email} 
+        gameId={gameId} 
+        onCreate={commentCreateHandler}
+      />
     </section>
   );
 }
