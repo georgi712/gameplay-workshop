@@ -10,13 +10,22 @@ const request = async (method, url, data, options = {}) => {
         options = {
             ...options,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...options.headers,
             },
             body: JSON.stringify(data),
         }
     }
 
+    console.log(options);
+    console.log(url);
     const response = await fetch(url, options);
+    const responseContentType = response.headers.get('Content-type')
+
+    if (!responseContentType) {
+        return;
+    }
+
     const result = await response.json();
 
     return result;

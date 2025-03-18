@@ -10,6 +10,7 @@ import GameCreate from "./components/game-create/GameCreate.jsx";
 import GameEdit from "./components/game-edit/GameEdit.jsx";
 import GameDetails from "./components/game-details/GameDetails.jsx";
 import Catalogue from "./components/catalog/Catalog.jsx";
+import Logout from "./components/logout/Logout.jsx";
 import { useState } from "react";
 
 function App() {
@@ -19,8 +20,12 @@ function App() {
     setAuthData(data);
   }
 
+  const userLogoutHandler = () => {
+    setAuthData({});
+  }
+
   return (
-    < UserContext.Provider value={{...authData, userLoginHandler}}>
+    < UserContext.Provider value={{...authData, userLoginHandler, userLogoutHandler}}>
     <div id="box">
       
       <Header />
@@ -32,6 +37,7 @@ function App() {
         <Route path="/games" element={<Catalogue />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
+        <Route path="/logout" element={<Logout />}/>
         <Route path="/games/:gameId/details" element={<GameDetails />}/>
         <Route path="/games/:gameId/edit" element={<GameEdit />}/>
       </Routes>
