@@ -10,10 +10,10 @@ import Catalogue from "./components/catalog/Catalog.jsx";
 import { useState } from "react";
 
 function App() {
-  const [email, setEmail] = useState('');
+  const [authData, setAuthData] = useState({});
   
-  const userLoginHandler = (authData) => {
-    setEmail(authData.email);
+  const userLoginHandler = (data) => {
+    setAuthData(data);
   }
 
   return (
@@ -28,7 +28,7 @@ function App() {
         <Route path="/games" element={<Catalogue />}/>
         <Route path="/login" element={<Login onLogin={userLoginHandler}/>}/>
         <Route path="/register" element={<Register />}/>
-        <Route path="/games/:gameId/details" element={<GameDetails email={email}/>}/>
+        <Route path="/games/:gameId/details" element={<GameDetails email={authData.email}/>}/>
         <Route path="/games/:gameId/edit" element={<GameEdit />}/>
       </Routes>
       </main>      
