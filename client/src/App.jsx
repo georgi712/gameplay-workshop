@@ -1,4 +1,7 @@
 import { Routes, Route } from "react-router";
+
+import { UserContext } from "./contexts/UserContext.js";
+
 import Header from "./components/header/Header";
 import Home from "./components/home/Home.jsx";
 import Login from "./components/login/login.jsx";
@@ -17,6 +20,7 @@ function App() {
   }
 
   return (
+    < UserContext.Provider value={{...authData, userLoginHandler}}>
     <div id="box">
       
       <Header />
@@ -28,11 +32,12 @@ function App() {
         <Route path="/games" element={<Catalogue />}/>
         <Route path="/login" element={<Login onLogin={userLoginHandler}/>}/>
         <Route path="/register" element={<Register />}/>
-        <Route path="/games/:gameId/details" element={<GameDetails email={authData.email}/>}/>
+        <Route path="/games/:gameId/details" element={<GameDetails />}/>
         <Route path="/games/:gameId/edit" element={<GameEdit />}/>
       </Routes>
       </main>      
     </div>
+    </UserContext.Provider>
   );
 }
 
