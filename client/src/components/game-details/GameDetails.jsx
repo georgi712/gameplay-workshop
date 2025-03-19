@@ -8,7 +8,7 @@ import useAuth from "../../hooks/useAuth";
 
 export default function GameDetails() {
   const navigate = useNavigate();
-  const { email } = useAuth();
+  const { email, _id: userId } = useAuth();
   const [comments, setComments] = useState([]);
   const { gameId } = useParams();
   const { game } = useGame(gameId);
@@ -37,6 +37,11 @@ export default function GameDetails() {
     setComments(state => [...state, newComment])
   };
 
+  const isOwner = userId === game._ownerId;
+  console.log(isOwner);
+  console.log(userId);
+  console.log(game._ownerId);
+
   return (
     <section id="game-details">
       <h1>Game Details</h1>
@@ -55,6 +60,8 @@ export default function GameDetails() {
         <CommentsShow comments={comments} />
 
         {/* Edit/Delete buttons ( Only for creator of this game )  */}
+        {isOwner
+        ? (
         <div className="buttons">
           <Link to={`/games/${gameId}/edit`} className="button">
             Edit
@@ -63,6 +70,9 @@ export default function GameDetails() {
             Delete
           </button>
         </div>
+        )
+      : null}
+        
       </div>
 
       {/* Bonus */}
