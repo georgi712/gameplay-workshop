@@ -1,23 +1,31 @@
-const request = async (method, url, data) => {
-    let options = {};
+const request = async (method, url, data, options = {}) => {
 
     if (method !== 'GET') {
-        options = {
-            method,
-        }
+       
+        options.method = method;
+        
     }
     
     if (data) {
         options = {
             ...options,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...options.headers,
             },
             body: JSON.stringify(data),
         }
     }
 
+    console.log(options);
+    console.log(url);
     const response = await fetch(url, options);
+    const responseContentType = response.headers.get('Content-type')
+
+    if (!responseContentType) {
+        return;
+    }
+
     const result = await response.json();
 
     return result;
@@ -27,5 +35,6 @@ export default {
     get: request.bind(null, 'GET'),
     post: request.bind(null, 'POST'),
     put: request.bind(null, 'PUT'),
-    delete: request.bind(null, 'DELETE')
+    delete: request.bind(null, 'DELETE'),
+    baseRequest: request,
 }
