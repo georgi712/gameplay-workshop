@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useEditGame, useGame } from "../../api/gameApi.js";
+import { useEditGame, useGame } from "../../api/gameApi";
 
 export default function GameEdit() {
   const navigate = useNavigate();

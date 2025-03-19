@@ -18,7 +18,7 @@ export default function useAuth() {
     }
 
     return {
-        authData,
+        ...authData,
         request: {
             get: requestWrapper.bind(null, 'GET'),
             post: requestWrapper.bind(null, 'POST'),

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import CommentsShow from "../comments-show/CommentsShow.jsx";
-import CommentsCreate from "../comments-create/CommentsCreate.jsx";
-import commentService from "../../services/commentService.js";
-import { useDeleteGame, useGame } from "../../api/gameApi.js";
+import CommentsShow from "../comments-show/CommentsShow";
+import CommentsCreate from "../comments-create/CommentsCreate";
+import commentService from "../../services/commentService";
+import { useDeleteGame, useGame } from "../../api/gameApi";
+import useAuth from "../../hooks/useAuth";
 
 export default function GameDetails() {
   const navigate = useNavigate();
-  const { email } = useState();
+  const { email } = useAuth();
   const [comments, setComments] = useState([]);
   const { gameId } = useParams();
   const { game } = useGame(gameId);
@@ -27,7 +28,7 @@ export default function GameDetails() {
       return;
     }
 
-    await deleteGame(game._id);
+    await deleteGame(gameId);
 
     navigate("/games");
   };

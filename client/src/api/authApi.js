@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import request from "../utils/request.js"
 import { UserContext } from "../contexts/UserContext.js";
 
@@ -42,7 +42,6 @@ export const useLogout = () => {
     const {accessToken, userLogoutHandler} = useContext(UserContext);
 
     useEffect(() => {
-        console.log(accessToken);
         if(!accessToken) {
             return
         };
