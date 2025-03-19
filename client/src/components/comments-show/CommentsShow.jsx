@@ -3,7 +3,7 @@ export default function CommentsShow({ comments }) {
     <div className="details-comments">
       <h2>Comments:</h2>
       <ul>
-        {comments.length > 0 ? (
+        {comments?.length > 0 ? (
           comments.map(({ _id, email, comment }) => (
             <li key={_id} className="comment">
               <p>{email}: {comment}</p>
